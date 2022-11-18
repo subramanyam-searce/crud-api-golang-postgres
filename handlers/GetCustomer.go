@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -16,10 +15,9 @@ func GetCustomer(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
 		fmt.Println("strconvAtoiError:", err)
-		json.NewEncoder(w).Encode(err)
+		SendResponse(w, r, err)
 	} else {
 		customer := dbconnect.GetCustomer(id)
-		json.NewEncoder(w).Encode(customer)
+		SendResponse(w, r, customer)
 	}
-
 }

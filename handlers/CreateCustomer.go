@@ -19,12 +19,12 @@ func CreateCustomer(w http.ResponseWriter, r *http.Request) {
 	if foundCustomer == nil {
 		err := dbconnect.CreateCustomer(&data)
 		if err != nil {
-			json.NewEncoder(w).Encode(err)
+			SendResponse(w, r, err)
 		} else {
-			json.NewEncoder(w).Encode(map[string]typedefs.Customer{"data_added": data})
+			SendResponse(w, r, map[string]typedefs.Customer{"data_added": data})
 		}
 	} else {
-		json.NewEncoder(w).Encode(map[string]string{"message": "User with id " + strconv.Itoa(id) + " already exist!"})
+		SendResponse(w, r, map[string]string{"message": "User with id " + strconv.Itoa(id) + " already exist!"})
 	}
 
 }

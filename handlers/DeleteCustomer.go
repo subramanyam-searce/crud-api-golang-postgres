@@ -25,11 +25,11 @@ func DeleteCustomer(w http.ResponseWriter, r *http.Request) {
 	if foundCustomer != nil {
 		err := dbconnect.DeleteCustomer(id)
 		if err != nil {
-			json.NewEncoder(w).Encode(err)
+			SendResponse(w, r, err)
 		} else {
-			json.NewEncoder(w).Encode(map[string]typedefs.Customer{"data_deleted": *foundCustomer})
+			SendResponse(w, r, map[string]typedefs.Customer{"data_deleted": *foundCustomer})
 		}
 	} else {
-		json.NewEncoder(w).Encode(map[string]string{"message": "User with id " + vars["id"] + " does not exist!"})
+		SendResponse(w, r, map[string]string{"message": "User with id " + vars["id"] + " does not exist!"})
 	}
 }
