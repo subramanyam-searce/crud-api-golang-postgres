@@ -13,9 +13,9 @@ type Route struct {
 }
 
 var Routes []Route = []Route{
-	{"/api/customer", handlers.CreateCustomer, http.MethodPost},
-	{"/api/customer", handlers.GetAllCustomers, http.MethodGet},
-	{"/api/customer/{id}", handlers.GetCustomer, http.MethodGet},
-	{"/api/customer/{id}", handlers.DeleteCustomer, http.MethodDelete},
-	{"/api/customer/{id}", handlers.UpdateCustomer, http.MethodPut},
+	{"/customer", handlers.CreateCustomer, http.MethodPost},
+	{"/customer", handlers.GetAllCustomers, http.MethodGet},
+	{"/customer/{id:[0-9]+}", handlers.GetCustomer, http.MethodGet},
+	{"/customer/{id:[0-9]+}", handlers.DeleteCustomer, http.MethodDelete},
+	{"/customer/{id:[0-9]+}/{key:(?:name|age|email)}/{value}", handlers.UpdateCustomer, http.MethodPut},
 }

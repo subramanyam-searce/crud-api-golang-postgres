@@ -17,7 +17,7 @@ func GetCustomer(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("strconvAtoiError:", err)
 		SendResponse(w, r, err)
 	} else {
-		customer := dbconnect.GetCustomer(id)
+		customer := dbconnect.GetCustomer(strconv.Itoa(id))
 		SendResponse(w, r, customer)
 	}
 }

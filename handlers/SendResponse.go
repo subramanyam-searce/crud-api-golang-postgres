@@ -18,7 +18,9 @@ func SendResponse(w http.ResponseWriter, r *http.Request, v any) {
 			fmt.Println("jsonEncodeError:", err)
 		}
 	} else {
-		fmt.Println("404")
 		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(map[string]string{
+			"message": "404 Not Found",
+		})
 	}
 }

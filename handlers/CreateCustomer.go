@@ -13,7 +13,7 @@ func CreateCustomer(w http.ResponseWriter, r *http.Request) {
 	data := typedefs.Customer{}
 	json.NewDecoder(r.Body).Decode(&data)
 
-	id := data.Id
+	id := strconv.Itoa(data.Id)
 	foundCustomer := dbconnect.GetCustomer(id)
 
 	if foundCustomer == nil {
@@ -24,7 +24,7 @@ func CreateCustomer(w http.ResponseWriter, r *http.Request) {
 			SendResponse(w, r, map[string]typedefs.Customer{"data_added": data})
 		}
 	} else {
-		SendResponse(w, r, map[string]string{"message": "User with id " + strconv.Itoa(id) + " already exist!"})
+		SendResponse(w, r, map[string]string{"message": "User with id " + id + " already exist!"})
 	}
 
 }

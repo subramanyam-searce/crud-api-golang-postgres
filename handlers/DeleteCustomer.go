@@ -1,10 +1,7 @@
 package handlers
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/subramanyam-searce/banking/dbconnect"
@@ -14,11 +11,7 @@ import (
 func DeleteCustomer(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		fmt.Println("strconvAtoiError:", err)
-		json.NewEncoder(w).Encode(err)
-	}
+	id := vars["id"]
 
 	foundCustomer := dbconnect.GetCustomer(id)
 

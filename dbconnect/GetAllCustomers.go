@@ -1,8 +1,7 @@
 package dbconnect
 
 import (
-	"fmt"
-
+	"github.com/subramanyam-searce/banking/helpers"
 	"github.com/subramanyam-searce/banking/typedefs"
 )
 
@@ -11,15 +10,12 @@ func GetAllCustomers() []typedefs.Customer {
 	customers := []typedefs.Customer{}
 
 	stmt, err := db.Prepare("SELECT * FROM customers")
-	if err != nil {
-		fmt.Println("dbPrepareError:", err)
-	}
+	helpers.HandleError("dbPrepareError", err)
 	defer stmt.Close()
 
 	rows, err := stmt.Query()
-	if err != nil {
-		fmt.Println("stmtExecError:", err)
-	}
+	helpers.HandleError("stmtQueryError", err)
+
 	for rows.Next() {
 		customer := typedefs.Customer{}
 		rows.Scan(&customer.Name, &customer.Id, &customer.Age, &customer.Email, &customer.Balance, &customer.CreatedAt)
