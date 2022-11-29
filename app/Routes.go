@@ -18,4 +18,6 @@ var Routes []Route = []Route{
 	{"/customer/{id:[0-9]+}", handlers.GetCustomer, http.MethodGet},
 	{"/customer/{id:[0-9]+}", handlers.DeleteCustomer, http.MethodDelete},
 	{"/customer/{id:[0-9]+}/{key:(?:name|age|email)}/{value}", handlers.UpdateCustomer, http.MethodPut},
+	{"/transaction", handlers.ViewAllTransactions, http.MethodGet},
+	{"/transfer", handlers.MakeTransaction, http.MethodPost},
 }

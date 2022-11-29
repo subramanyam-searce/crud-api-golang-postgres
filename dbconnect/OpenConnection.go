@@ -17,5 +17,7 @@ func init() {
 }
 
 func ConnectToDB() *sql.DB {
+	helpers.CheckGoroutines()
+
 	return db
 }
